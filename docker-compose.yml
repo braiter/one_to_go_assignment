@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  one_to_go_assignment:
+    container_name: vue-app
+    build:
+      context: .
+    ports:
+      - "8080:80"
