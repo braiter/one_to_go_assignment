@@ -1,9 +1,8 @@
 # Date mask for input-tag using Vue 3 Composition API and TypeScript
 
 ### Requirements:
-- Node
-- Docker
 - Console
+- Docker
 
 ### Instruction for installing this project:
 1. Download this repository to your local environment. To do it open console and run:
