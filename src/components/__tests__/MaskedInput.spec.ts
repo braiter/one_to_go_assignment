@@ -13,14 +13,14 @@ describe('MaskedInput', () => {
 
     it ('default date format', () => {
         const wrapper = mount(MaskedInput, {props: {date}});
-        const input = wrapper.find('#date_input');
-        expect(input.element.value).toEqual('31/12/2000')
+        const input = wrapper.find('#date_input').element as HTMLInputElement;
+        expect(input.value).toEqual('31/12/2000')
     });
 
     it ('US date format', () => {
         const wrapper = mount(MaskedInput, {props: {date, locale: 'US'}});
-        const input = wrapper.find('#date_input');
-        expect(input.element.value).toEqual('12/31/2000');
+        const input = wrapper.find('#date_input').element as HTMLInputElement;
+        expect(input.value).toEqual('12/31/2000');
     });
 
     it ('handling wrong day', async() => {

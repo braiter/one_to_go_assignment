@@ -48,7 +48,7 @@ export default defineComponent({
          */
         const formatToDisplay = (value: string): string => {
             if (!value) return '';
-            let [year, month, day]:number = value.split('-');
+            let [year, month, day] = value.split('-');
 
             if (day.length == 1) day += 'D';
             if (month.length == 1) month += 'M';
@@ -103,7 +103,7 @@ export default defineComponent({
          * Validates model and input's value for correct format, months and checking a days in month (28/30/31)
          */
         const checkValidation = async() => {
-            const input = dateInput.value;
+            const input = dateInput.value as HTMLInputElement|null;
 
             if (input) {
                 if (!/^(\d{2})\/(\d{2})\/(\d{4})$/.test(input.value) && /\d+/g.test(input.value)) {
@@ -138,13 +138,16 @@ export default defineComponent({
             () => props.date,
             (newValue) => {
                 displayDate.value = formatToDisplay(newValue);
+                const input = dateInput.value as HTMLInputElement|null;
 
                 setTimeout(() => {
-                    const regex = /[A-Z]/g;
-                    regex.test(dateInput.value.value);
+                    if (input) {
+                        const regex = /[A-Z]/g;
+                        regex.test(input.value);
 
-                    const cursorPosition = regex.lastIndex;
-                    dateInput.value.setSelectionRange(cursorPosition-1, cursorPosition-1);
+                        const cursorPosition = regex.lastIndex;
+                        input.setSelectionRange(cursorPosition-1, cursorPosition-1);
+                    }
                 })
             }
         );
@@ -157,7 +160,7 @@ export default defineComponent({
             event.preventDefault()
 
             const target = event.target as HTMLInputElement;
-            let cursorPosition = target.selectionStart;
+            let cursorPosition:number|null = target.selectionStart;
 
             if (/^\d$/.test(event.key) && (/[A-Z]/g.test(props.date) || props.date.length < 10)) {
                 const formattedValue = formatToModel(target.value + event.key);
@@ -169,7 +172,7 @@ export default defineComponent({
                     emit('update:date', formattedValue);
                 }
             }
-            else if (event.key == 'Backspace') {
+            else if (event.key == 'Backspace' && cursorPosition) {
                 let inputValue = target.value;
                 let shiftedLetter;
 
@@ -177,7 +180,7 @@ export default defineComponent({
                 else if (cursorPosition < 8) shiftedLetter = locale != 'US'? 'M': 'D';
                 else shiftedLetter = 'Y';
 
-                if (cursorPosition - 1 && inputValue[cursorPosition - 1] == '\/') {
+                if (cursorPosition - 1 && inputValue[cursorPosition - 1] == '/') {
                     cursorPosition -= 1;
                 }
 
@@ -198,14 +201,17 @@ export default defineComponent({
          */
         const onFocus = (event: FocusEvent) => {
             event.preventDefault();
+            const input = dateInput.value as HTMLInputElement|null;
 
-            const regex = /[A-Z]/g;
-            regex.test(dateInput.value.value);
+            if (input) {
+                const regex = /[A-Z]/g;
+                regex.test(input.value);
 
-            const cursorPosition = regex.lastIndex;
-            setTimeout(() => {
-                dateInput.value.setSelectionRange(cursorPosition-1, cursorPosition-1);
-            })
+                const cursorPosition = regex.lastIndex;
+                setTimeout(() => {
+                    input.setSelectionRange(cursorPosition-1, cursorPosition-1);
+                })
+            }
         }
 
         return {
