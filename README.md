@@ -1,45 +1,26 @@
-# one_to_go_assignment
+# Date mask for input-tag using Vue 3 Composition API and TypeScript
 
-This template should help get you started developing with Vue 3 in Vite.
+### Requirements:
+- Node
+- Docker
+- Console
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+### Instruction for installing this project:
+1. Download this repository to your local environment. To do it open console and run:
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+git checkout git@gitlab.com:braiter/one_to_go_assignment.git
 ```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
+2. Make sure you have installed Docker app. To do it open console and run:
 ```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
+docker -v
 ```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+3. (optional) If you have no installed Docker at your local enviroment, you can get it [here](https://docs.docker.com/get-docker/)
+4. Make an image from a folder and run it as a container:
+```
+cd one_to_go_assignment
+docker-compose up -d
+```
+5. Open in your browser:
+```
+localhost:8080
 ```
